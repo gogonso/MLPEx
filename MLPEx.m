@@ -4,7 +4,7 @@ function main
 	[w,b]=initWaB;%inicialización de pesos y bias
 	[alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;%datos de validación
 	[mEnt,mVal,mPru]=divDataset(P,dEnt);%division del dataset
-	mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)%llama a la red
+	mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)%llama a la red
 end
 function [P,T]=obtenerDataset
 	P=-2:.2:2;
@@ -30,10 +30,11 @@ function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	numval=3;
 	dEnt=input('Ingrese de que forma se dividira el Dataset, escribe los numero separados por un espacio y entre []: ');
 end
-function mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)
-	
-	a=feedforward(w,b,vtf,p);
-	[w,b]=backpropagation(a,w,b,functions,e,alpha)
+function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)
+	for i=1:maxepoch
+		a=feedforward(w,b,vtf,mEnt);
+		[w,b]=backpropagation(a,w,b,functions,e,alpha)
+	end
 end
 function [mEnt,mVal,mPru]=divDataset(P,dEnt)
 	tam=length(P)
