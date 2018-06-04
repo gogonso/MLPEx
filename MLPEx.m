@@ -31,9 +31,14 @@ function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	dEnt=input('Ingrese de que forma se dividira el Dataset, escribe los numero separados por un espacio y entre []: ');
 end
 function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)
-	for i=1:maxepoch
-		a=feedforward(w,b,vtf,mEnt);
-		[w,b]=backpropagation(a,w,b,functions,e,alpha)
+	for i=1:maxepoch+1
+		if i==maxepoch+1
+			fprintf('No se logró entrenamiento\n');
+			break
+		else
+			a=feedforward(w,b,vtf,mEnt);		
+			[w,b]=backpropagation(a,w,b,vtf,e,alpha)
+		end
 	end
 end
 function [mEnt,mVal,mPru]=divDataset(P,dEnt)
