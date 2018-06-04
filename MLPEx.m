@@ -1,8 +1,8 @@
 function main
   [P,T]=obtenerDataset;%dataset
   [vcn,vtf]=obtenerArquitectura;%arquitectura
-  [W1,B1,W2,B2]=initWaB;%inicialización de pesos y bias
-  [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;%datos de validación
+  [W1,B1,W2,B2]=initWaB;%inicializaciÃ³n de pesos y bias
+  [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;%datos de validaciÃ³n
 	mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w1,b1,w2,b2)%llama a la red
 end
 function [P,T]=obtenerDataset
@@ -20,11 +20,11 @@ function [W1,B1,W2,B2]=initWaB
   B2=.48;
 end
 function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
-  alpha=input('Ingrese el factor de aprendizaje (alfa): ');
-  maxepoch=input('Ingrese la cantidad máxima de épocas (maxepoch): ');
-  minEtrain=input('Ingrese el valor mínimo del error en una época (minEtrain): ');
-  valepoch=input('Ingrese la cantidad de épocas de validación que se ejecutarán (valepoch): ');
-  numval=input('Ingrese la cantidad de crecimientos consecutivos del error de validación (numval): ');
+  alpha=.1;
+  maxepoch=5;
+  minEtrain=.0001;
+  valepoch=10;
+  numval=3;
 end
 function mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w1,b1,w2,b2)
 	a=feedforward(w,b,vtf,p);
