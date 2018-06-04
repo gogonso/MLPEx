@@ -2,7 +2,7 @@ function MLPEx
 	[P,T]=obtenerDataset;%dataset
 	[vcn,vtf]=obtenerArquitectura;%arquitectura
 	[w,b]=initWaB;%inicialización de pesos y bias
-	[alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;%datos de validación
+	[alpha,maxepoch,minEtrain,valepoch,numval,dEnt]=obtenerDatos;%datos de validación
 	[mEnt,mVal,mPru]=divDataset(P,dEnt);%division del dataset
 	mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)%llama a la red
 end
@@ -43,7 +43,7 @@ function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mP
 			for j=1:size(mEnt)
 				errc=0;
 				a=feedforward(w,b,vtf,mEnt);
-				e=T(j)-a;
+				e=T(j)-a{length (a)};
 				errc=errc+e;
 				[w,b]=backpropagation(a,w,b,vtf,e,alpha);
 			end
