@@ -36,8 +36,11 @@ function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mP
 			fprintf('No se logró entrenamiento\n');
 			break
 		else
-			a=feedforward(w,b,vtf,mEnt);		
-			[w,b]=backpropagation(a,w,b,vtf,e,alpha)
+			for j=1:size(mEnt)
+				a=feedforward(w,b,vtf,mEnt);	
+				e=T(j)-a;
+				[w,b]=backpropagation(a,w,b,vtf,e,alpha)
+			end			
 		end
 	end
 end
