@@ -32,6 +32,7 @@ function [alpha,maxepoch,minEtrain,valepoch,numval,dEnt]=obtenerDatos
 end
 function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)
 	error1=1;
+    [n,m]=size(mEnt);
 	for i=1:maxepoch+1
 		if i==maxepoch+1
 			fprintf('No se logró entrenamiento\n');
@@ -42,12 +43,12 @@ function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mP
 		else		
 			for j=1:size(mEnt)
 				errc=0;
-				a=feedforward(w,b,vtf,mEnt);
+				a=feedforward(w,b,vtf,mEnt(j));
 				e=T(j)-a{length (a)};
 				errc=errc+e;
 				[w,b]=backpropagation(a,w,b,vtf,e,alpha);
 			end
-			error1=errc/size(mEnt);
+			error1=errc/m;
 		end
 	end
 end
