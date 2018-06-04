@@ -1,9 +1,9 @@
 function main
 	[P,T]=obtenerDataset;%dataset
 	[vcn,vtf]=obtenerArquitectura;%arquitectura
-	[W1,B1,W2,B2]=initWaB;%inicialización de pesos y bias
+	[w,b]=initWaB;%inicialización de pesos y bias
 	[alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;%datos de validación
-	mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w1,b1,w2,b2)%llama a la red
+	mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b)%llama a la red
 end
 function [P,T]=obtenerDataset
 	P=-2:.2:2;
@@ -13,11 +13,13 @@ function [vcn,vtf]=obtenerArquitectura
 	vcn=[1 2 1];
 	vtf=[2 1];
 end
-function [W1,B1,W2,B2]=initWaB
-	W1=[-.27;-.41];
-	B1=[-.48;-.13];
-	W2=[.09 -.17];
-	B2=.48;
+function [w,b]=initWaB
+	w={ };
+	b={ };
+	w{1}=[-.27;-.41];
+	b{1}=[-.48;-.13];
+	w{2}=[.09 -.17];
+	b{2}=.48;
 end
 function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	alpha=.1;
@@ -26,9 +28,9 @@ function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	valepoch=10;
 	numval=3;
 end
-function mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w1,b1,w2,b2)
+function mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b)
 	a=feedforward(w,b,vtf,p);
-	[w1,b1]=backpropagation(a,w1,b1,functions,e,alpha)
+	[w,b]=backpropagation(a,w,b,functions,e,alpha)
 end
 function [a] = feedforward(w,b,functions,p)
 	a = {}
