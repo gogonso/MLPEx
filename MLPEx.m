@@ -7,6 +7,9 @@ function main
 end
 function [P,T]=obtenerDataset
 	P=-2:.2:2;
+	mEnt=P(1:15)
+	mVal=P(16:18)	
+	mPru=P(19:21)
 	T=1+sin((pi/4)*P);
 end
 function [vcn,vtf]=obtenerArquitectura
