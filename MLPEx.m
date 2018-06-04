@@ -35,7 +35,7 @@ function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mP
     [n,m]=size(mEnt);
 	for i=1:maxepoch+1
 		if i==maxepoch+1
-			fprintf('No se logró entrenamiento\n');
+			fprintf('No se logro entrenamiento\n');
 			break
 		elseif error1<minEtrain
 			fprintf('Terminó entrenamiento\n');
