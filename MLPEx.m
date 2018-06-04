@@ -4,6 +4,7 @@ function MLPEx
 	[w,b]=initWaB;%inicialización de pesos y bias
 	[alpha,maxepoch,minEtrain,valepoch,numval,dEnt]=obtenerDatos;%datos de validación
 	[mEnt,mVal,mPru]=divDataset(P,dEnt);%division del dataset
+	graficar(W1,B1); %graficacion de resultados
 	mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)%llama a la red
 end
 function [P,T]=obtenerDataset
@@ -92,4 +93,23 @@ function [w, b] = backpropagation(a,w,b,functions,e,alpha)
         w{cont} = w{cont}-alpha*sensitivities{cont}*a{cont}';
         b{cont} = b{cont}-alpha*sensitivities{cont};
     end 
+end
+function graficar(W1,B1)
+    tam1=size(W1);
+    tam2=size(B1);
+    for cont1 = 1:tam1(1)
+        for cont2 = 1: tam1(2)
+            plot(W1(cont1,cont2),W1(cont1,cont2))
+            %fprintf('W:%f\n',W1(cont1,cont2))
+        end
+    end
+        hold on
+    for cont1 = 1:tam2(1)
+        for cont2 = 1: tam2(2)
+            plot(B1(cont1,cont2),B1(cont1,cont2))
+            %fprintf('B:%f\n',B1(cont1,cont2))
+        end
+    end
+    legend('Pesos','Bias')
+    hold off
 end
