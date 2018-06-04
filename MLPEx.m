@@ -29,9 +29,12 @@ function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	numval=3;
 end
 function mlp(P,T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b)
-	entrenamiento=p(1:15);
-	validacion=p(16:18);
-	pruebas=p(19:21);
+	pentrenamiento=p(1:15);
+	pvalidacion=p(16:18);
+	ppruebas=p(19:21);
+	tentrenamiento=t(1:15);
+	tvalidacion=t(16:18);
+	tpruebas=t(19:21);
 	a=feedforward(w,b,vtf,p);
 	[w,b]=backpropagation(a,w,b,functions,e,alpha)
 end
