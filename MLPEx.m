@@ -31,16 +31,23 @@ function [alpha,maxepoch,minEtrain,valepoch,numval]=obtenerDatos;
 	dEnt=input('Ingrese de que forma se dividira el Dataset, escribe los numero separados por un espacio y entre []: ');
 end
 function mlp(T,vcn,vtf,alpha,maxepoch,minEtrain,valepoch,numval,w,b,mEnt,mVal,mPru)
+	errc=1;
 	for i=1:maxepoch+1
 		if i==maxepoch+1
 			fprintf('No se logró entrenamiento\n');
 			break
-		else
+		elseif errorc<minEtrain
+			fprintf('Terminó entrenamiento\n');
+			break
+		else		
 			for j=1:size(mEnt)
-				a=feedforward(w,b,vtf,mEnt);	
+				errc=0;
+				a=feedforward(w,b,vtf,mEnt);
 				e=T(j)-a;
+				errc=errc+e;
 				[w,b]=backpropagation(a,w,b,vtf,e,alpha)
-			end			
+			end
+			errorc=errc/size(mEnt);
 		end
 	end
 end
